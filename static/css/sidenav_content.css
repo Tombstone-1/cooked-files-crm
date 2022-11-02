@@ -9,7 +9,7 @@
 
 :root{
     /* ===== default colors ===== light theme ==== */
-    
+        /* body light color was here.*/
 
     /* ====== Transition ====== */
     --tran-03: all 0.2s ease;
@@ -42,7 +42,7 @@ body.dark{
     --sidebar-color: #242526;
     --primary-color: #3a3b3c;
     --primary-color-light: #3a3b3c;
-    --toggle-color: #fff;
+    --toggle-color: linear-gradient(#5F0A87, #A4508B);
     --text-color: #ccc;
 }
 /* ===== end theme ===== */
@@ -53,7 +53,7 @@ body.dark{
     top: 0;
     left: 0;
     height: 100%;
-    width: 250px;
+    width: 220px;
     padding: 10px 14px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
@@ -265,7 +265,7 @@ body.dark .mode .sun-moon i.moon{
     height: 22px;
     width: 40px;
     border-radius: 25px;
-    background-color: var(--toggle-color);
+    background: var(--toggle-color); /* gradient do not work with background-color */
     transition: var(--tran-05);
 }
 
@@ -286,13 +286,14 @@ body.dark .switch::before{
     left: 20px;
 }
 
+/* section.home position changes here. */
 .home{
     position: absolute;
     top: 0;
     top: 0;
-    left: 250px;
+    left: 210px;
     height: 100vh;
-    width: calc(100% - 250px);
+    width: calc(100% - 210px);
     background-color: var(--body-color);
     transition: var(--tran-05);
 }

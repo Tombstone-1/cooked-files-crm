@@ -11,6 +11,7 @@ toggle.addEventListener("click" , () =>{
 
 /* === hard coded theme/ on page load === */
 body.classList.toggle("light");
+modeText.innerHTML = "Go Dark";
 
 /* === theme toggler === */
 modeSwitch.addEventListener("click" , () =>{
