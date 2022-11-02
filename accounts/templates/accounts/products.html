@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="container-fluid" style="margin-top: 30px;">
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <span>
+                    <h5 style="font-size: 30px;">Products list
+                    <a class="btn btn-primary" style="float:right;" href="{% url 'create_product' %}">Add Product</a>
+                    </h5>
+                </span>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Edit</th>
+                            <th>Remove</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{product.name}}</td>
+                            <td>{{product.category}}</td>
+                            <td>{{product.price}}</td>
+                            {% if request.user.is_staff %}
+                            <td><a class="btn btn-warning" href="{% url 'update_product' product.id %}">Edit</a></td>
+                            <td><a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Remove</a></td>
+                            {% else %}
+                            <td><a class="btn btn-warning" href="">Buy</a></td>
+                            <td><a class="btn btn-danger" href="">Wishlist</a></td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

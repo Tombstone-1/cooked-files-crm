@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="container-fluid" style="margin-top: 30px;">
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <span>
+                    <h5 style="font-size: 30px;">Customer list
+                    <a class="btn btn-primary" style="float:right;" href="{% url 'customer_create' %}">Add Customer</a>
+                    </h5>
+                </span>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Profile</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in customers%}
+                        <tr>
+                            <td><a class="btn btn-info btn-sm" href="{% url 'customers_profile' i.id %}">View</a></td>
+                            <td>{{i.name}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.phone}}</td>
+                            <td>{{i.country}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

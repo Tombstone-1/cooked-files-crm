@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid" style="margin-top: 10px;">
+    <div class="row">
+
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-light mb-3" style="background-color: #013328;">
+                    <div class="card-header">
+                        <h5 class="card-title">Total</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{total}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-center text-light mb-3" style="background-color: #013328;">
+                    <div class="card-header ">
+                        <h5 class="card-title">Delivered</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{delivered}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    <br>
+    <h5 class="text nav-text">Recent Orders: </h5>
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Placed</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                            <th>Edit</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in recent %}
+                        <tr>
+                            <td>{{order.product}}</td>
+                            <td>{{order.product.category}}</td>
+                            <td>{{order.date_created}}</td>
+                            <td>{{order.status}}</td>
+                            <td>{{order.date_update}}</td>
+                            <td><a class="btn btn-warning" href="{% url 'order_update' order.id %}">Edit</a></td>
+                            <td><a class="btn btn-danger" href="{% url 'order_delete' order.id %}">Remove</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
