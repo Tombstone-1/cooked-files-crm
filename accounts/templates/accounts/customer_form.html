@@ -2,20 +2,32 @@
 
 {% block content %}
 
-<div class="container-fluid" style="margin-top: 30px;">
+<div class="container-fluid" style="margin-top: 10px;">
     <div class="row">
-        <div class="col-xxl text-center" >
+        <div class="col-md-3" >
             <div class="card card-body">
-              <form action="" method="POST"><!--view dependent action-->
+              <a class="btn btn-warning" href="{% url 'user-profile' %}"> &#8592; Back to Profile</a>
+              <hr>
+              <h5 style="text-align: center">Profile Picture</h5>
+              <hr>
+              <img src="{{request.user.customer.profile_pic.url}}" style="height: 286px; width: 286px;"/>
+            </div>
+        </div>
+        <div class="col-md-9">
+          <div class="card card-body">
+
+              <form action="" method="POST" enctype="multipart/form-data"><!--view dependent action--><!-- enctype for image upload -->
                 {% csrf_token %}
               
-                {{form}}
+                {{form.as_p}}
 
                 <button type="submit" class="btn btn-dark">Submit</button>
               </form>
-            </div>
+
+          </div>
         </div>
     </div>
 </div>
+
 
 {% endblock %}

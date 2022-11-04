@@ -165,7 +165,7 @@ def Customers_profile(request, pk):
 def customer_create(request):
     form = customerForm()
     if request.method == 'POST':
-        form = customerForm(request.POST)
+        form = customerForm(request.POST, request.FILES) # request.FILES for images
         if form.is_valid():
             form.save()
             return redirect('/')
@@ -179,7 +179,7 @@ def customer_update(request, pk):
     query = Customer.objects.get(id=pk)
     form = customerForm(instance=query)
     if request.method =='POST':
-        form = customerForm(request.POST, instance=query)
+        form = customerForm(request.POST, request.FILES, instance=query)
         if form.is_valid():
             form.save()
             return redirect('/')
@@ -193,7 +193,7 @@ def customer_delete(request, pk):
     query = Customer.objects.get(id=pk)
     if request.method == 'POST':
         query.delete()
-        return redirect('/')
+        return redirect('login')
 
     context = {'customer':query}
     return render(request, 'accounts/customer_delete.html', context)

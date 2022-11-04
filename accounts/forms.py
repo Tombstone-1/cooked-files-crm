@@ -13,6 +13,7 @@ class customerForm(ModelForm):
 	class Meta:
 		model = Customer
 		fields = '__all__'
+		exclude = ['user']
 
 class productForm(ModelForm):
 	class Meta:
