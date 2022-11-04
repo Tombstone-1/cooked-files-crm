@@ -134,31 +134,23 @@ def userProfile(request):
     }
     return render(request, 'accounts/user-profile.html', context)
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles = ['customer'])
+def userDelete(request, pk):
+    customer = Customer.objects.get(id=pk)
+    user = User.objects.get(email=customer.email)
+
+    if request.method == 'POST':
+        user.delete()
+        messages.success(request, "User/Customer deleted Successfully")
+        return redirect('login')
+    
+    context = {'customer': customer}
+    return render(request, 'accounts/user-delete.html', context)
+
 ################################ Customers ###################################
 
-@login_required(login_url='login')
-@admin_only
-def Customers(request):
-    customer = Customer.objects.all()
-
-    context = {'customers':customer}
-    return render(request, 'accounts/customer.html', context)
-
-@login_required(login_url='login')
-@admin_only
-def Customers_profile(request, pk):
-    customer = Customer.objects.get(id=pk)
-    orders = customer.order_set.all()
-    count = orders.count()
-
-    order_filter = OrderFilter(request.GET, queryset=orders)
-    orders = order_filter.qs
-
-    context = {
-        'customer':customer, 'orders':orders,
-        'count':count, 'filter':order_filter
-    }
-    return render(request, 'accounts/customer_profile.html', context)
 
 @login_required(login_url='login')
 @admin_only
@@ -187,16 +179,30 @@ def customer_update(request, pk):
     context = {'form':form}
     return render(request, 'accounts/customer_form.html', context)
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['customer'])
-def customer_delete(request, pk):
-    query = Customer.objects.get(id=pk)
-    if request.method == 'POST':
-        query.delete()
-        return redirect('login')
 
-    context = {'customer':query}
-    return render(request, 'accounts/customer_delete.html', context)
+@login_required(login_url='login')
+@admin_only
+def Customers(request):
+    customer = Customer.objects.all()
+
+    context = {'customers':customer}
+    return render(request, 'accounts/customer.html', context)
+
+@login_required(login_url='login')
+@admin_only
+def Customers_profile(request, pk):
+    customer = Customer.objects.get(id=pk)
+    orders = customer.order_set.all()
+    count = orders.count()
+
+    order_filter = OrderFilter(request.GET, queryset=orders)
+    orders = order_filter.qs
+
+    context = {
+        'customer':customer, 'orders':orders,
+        'count':count, 'filter':order_filter
+    }
+    return render(request, 'accounts/customer_profile.html', context)
 
 
 ################################# Products ##################################

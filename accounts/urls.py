@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('user-page', views.userPage, name='user-page'),
     path('user-profile', views.userProfile, name='user-profile'),
+    path('user-delete/<str:pk>/', views.userDelete, name='user-delete'),
 
 
     path('products/', views.Products, name='products'),
@@ -21,7 +22,6 @@ urlpatterns = [
     path('customers_profile/<str:pk>/', views.Customers_profile, name='customers_profile'),
     path('customer_create/', views.customer_create, name='customer_create'),
     path('customer_update/<str:pk>/', views.customer_update, name='customer_update'),
-    path('customer_delete/<str:pk>/', views.customer_delete, name='customer_delete'),
     
 
     path('order_create/<str:pk>', views.order_create, name='order_create'), #multiple order(formset) with customer prefilled
